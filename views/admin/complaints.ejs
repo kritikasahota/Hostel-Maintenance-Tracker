@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Complaints | HostelCare</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* ADMIN COMPLAINT MANAGEMENT */
+
+        .complaint-page-header {
+            background: linear-gradient(120deg, #172554, #2563eb);
+            color: white;
+            padding: 32px;
+            border-radius: 18px;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 25px rgba(23, 37, 84, 0.15);
+        }
+
+        .complaint-page-header h2 {
+            color: white;
+            font-weight: 750;
+        }
+
+        .complaint-page-header p {
+            color: #dbeafe;
+            margin-bottom: 0;
+        }
+
+        .complaint-summary-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 22px;
+            height: 100%;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+        }
+
+        .complaint-summary-card p {
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .complaint-summary-card h3 {
+            color: #172554;
+            font-size: 30px;
+            font-weight: 750;
+            margin-bottom: 0;
+        }
+
+        .complaint-summary-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 11px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        .complaint-table-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+        }
+
+        .complaint-table-header {
+            padding: 22px 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .complaint-table-header h5 {
+            color: #172554;
+            font-weight: 750;
+        }
+
+        .complaint-table-body {
+            padding: 20px;
+        }
+
+        .complaint-management-table {
+            min-width: 1250px;
+        }
+
+        .complaint-management-table thead th {
+            background: #eff6ff;
+            color: #172554;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .complaint-management-table tbody td {
+            padding: 16px 12px;
+            font-size: 14px;
+        }
+
+        .complaint-description {
+            min-width: 180px;
+            max-width: 240px;
+            white-space: normal;
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        .complaint-form-select {
+            min-width: 125px;
+            font-size: 13px;
+        }
+
+        .complaint-action-form {
+            min-width: 130px;
+        }
+
+        .complaint-status {
+            display: inline-block;
+            padding: 7px 11px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-assigned {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-progress {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .status-resolved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .complaint-empty-state {
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .complaint-empty-state div {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .complaint-empty-state h5 {
+            color: #172554;
+            font-weight: 700;
+        }
+
+        @media (max-width: 576px) {
+            .complaint-page-header {
+                padding: 25px 20px;
+            }
+
+            .complaint-table-body {
+                padding: 12px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <%- include("../includes/navbar.ejs") %>
+
+    <div class="container py-4 py-md-5">
+
+        <!-- ================= PAGE HEADER ================= -->
+
+        <div class="complaint-page-header">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                <div>
+                    <p class="mb-2">HOSTELCARE ADMIN PORTAL</p>
+
+                    <h2 class="mb-2">
+                        Manage Complaints
+                    </h2>
+
+                    <p>
+                        Monitor maintenance requests and manage staff assignments.
+                    </p>
+                </div>
+
+                <a href="/admin/dashboard" class="btn btn-light fw-semibold">
+                    ← Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-4 col-sm-6">
+
+                <div class="complaint-summary-card">
+
+                    <div class="complaint-summary-icon">
+                        📋
+                    </div>
+
+                    <p>Total Complaints</p>
+
+                    <h3>
+                        <%= complaints.length %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-sm-6">
+
+                <div class="complaint-summary-card">
+
+                    <div class="complaint-summary-icon">
+                        ⏳
+                    </div>
+
+                    <p>Pending Complaints</p>
+
+                    <h3>
+                        <%= complaints.filter(c => ["Pending", "Assigned", "In Progress"].includes(c.status)).length %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-sm-6">
+
+                <div class="complaint-summary-card">
+
+                    <div class="complaint-summary-icon">
+                        ✅
+                    </div>
+
+                    <p>Resolved Complaints</p>
+
+                    <h3>
+                        <%= complaints.filter(c => c.status === "Resolved").length %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= COMPLAINT TABLE ================= -->
+
+        <div class="complaint-table-card">
+
+            <div class="complaint-table-header">
+
+                <div>
+                    <h5 class="mb-1">
+                        All Maintenance Complaints
+                    </h5>
+
+                    <p class="text-muted small mb-0">
+                        Assign staff members and update complaint progress.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="complaint-table-body">
+
+                <% if (complaints.length === 0) { %>
+
+                    <div class="complaint-empty-state">
+
+                        <div>📭</div>
+
+                        <h5>No Complaints Yet</h5>
+
+                        <p class="text-muted mb-0">
+                            Student maintenance requests will appear here.
+                        </p>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle complaint-management-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Room</th>
+                                    <th>Complaint</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Assigned Staff</th>
+                                    <th>Assign Staff</th>
+                                    <th>Status</th>
+                                    <th>Update Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <% complaints.forEach(complaint => { %>
+
+                                    <tr>
+
+                                        <!-- STUDENT -->
+
+                                        <td>
+                                            <strong>
+                                                <%= complaint.student
+                                                    ? complaint.student.name
+                                                    : "Unknown Student" %>
+                                            </strong>
+
+                                            <div class="text-muted small">
+                                                <%= complaint.student
+                                                    ? complaint.student.email
+                                                    : "" %>
+                                            </div>
+                                        </td>
+
+
+                                        <!-- ROOM -->
+
+                                        <td>
+                                            <% if (complaint.room) { %>
+
+                                                <strong>
+                                                    <%= complaint.room.roomNumber %>
+                                                </strong>
+
+                                                <div class="text-muted small">
+                                                    Block <%= complaint.room.block %>
+                                                </div>
+
+                                            <% } else { %>
+
+                                                <span class="text-muted">
+                                                    Not available
+                                                </span>
+
+                                            <% } %>
+                                        </td>
+
+
+                                        <!-- TITLE -->
+
+                                        <td>
+                                            <strong>
+                                                <%= complaint.title %>
+                                            </strong>
+                                        </td>
+
+
+                                        <!-- CATEGORY -->
+
+                                        <td>
+                                            <%= complaint.category %>
+                                        </td>
+
+
+                                        <!-- DESCRIPTION -->
+
+                                        <td>
+                                            <div class="complaint-description">
+                                                <%= complaint.description %>
+                                            </div>
+                                        </td>
+
+
+                                        <!-- DATE -->
+
+                                        <td>
+                                            <%= complaint.createdAt.toLocaleDateString("en-IN") %>
+                                        </td>
+
+
+                                        <!-- ASSIGNED STAFF -->
+
+                                        <td>
+
+                                            <% if (complaint.assignedTo) { %>
+
+                                                <strong>
+                                                    <%= complaint.assignedTo.name %>
+                                                </strong>
+
+                                            <% } else { %>
+
+                                                <span class="text-muted">
+                                                    Not assigned
+                                                </span>
+
+                                            <% } %>
+
+                                        </td>
+
+
+                                        <!-- ASSIGN STAFF -->
+
+                                        <td>
+
+                                            <% if (!["Resolved", "Rejected"].includes(complaint.status)) { %>
+
+                                                <% if (staffMembers.length > 0) { %>
+
+                                                    <form
+                                                        action="/admin/complaints/<%= complaint._id %>/assign-staff"
+                                                        method="POST"
+                                                        class="complaint-action-form">
+
+                                                        <select
+                                                            name="staffId"
+                                                            class="form-select complaint-form-select mb-2"
+                                                            required>
+
+                                                            <option value="">
+                                                                Select Staff
+                                                            </option>
+
+                                                            <% staffMembers.forEach(staff => { %>
+
+                                                                <option
+                                                                    value="<%= staff._id %>"
+                                                                    <%= complaint.assignedTo &&
+                                                                        complaint.assignedTo._id.toString() === staff._id.toString()
+                                                                        ? "selected"
+                                                                        : "" %>>
+
+                                                                    <%= staff.name %>
+
+                                                                </option>
+
+                                                            <% }) %>
+
+                                                        </select>
+
+                                                        <button
+                                                            type="submit"
+                                                            class="btn btn-sm btn-outline-primary w-100">
+
+                                                            Assign Staff
+
+                                                        </button>
+
+                                                    </form>
+
+                                                <% } else { %>
+
+                                                    <span class="text-muted small">
+                                                        No staff available
+                                                    </span>
+
+                                                <% } %>
+
+                                            <% } else { %>
+
+                                                <span class="text-muted small">
+                                                    Closed
+                                                </span>
+
+                                            <% } %>
+
+                                        </td>
+
+
+                                        <!-- STATUS -->
+
+                                        <td>
+
+                                            <% let statusClass = "status-pending" %>
+
+                                            <% if (complaint.status === "Assigned") { %>
+                                                <% statusClass = "status-assigned" %>
+                                            <% } else if (complaint.status === "In Progress") { %>
+                                                <% statusClass = "status-progress" %>
+                                            <% } else if (complaint.status === "Resolved") { %>
+                                                <% statusClass = "status-resolved" %>
+                                            <% } else if (complaint.status === "Rejected") { %>
+                                                <% statusClass = "status-rejected" %>
+                                            <% } %>
+
+                                            <span class="complaint-status <%= statusClass %>">
+                                                <%= complaint.status %>
+                                            </span>
+
+                                        </td>
+
+
+                                        <!-- UPDATE STATUS -->
+
+                                        <td>
+
+                                            <form
+                                                action="/admin/complaints/<%= complaint._id %>/status"
+                                                method="POST"
+                                                class="complaint-action-form">
+
+                                                <select
+                                                    name="status"
+                                                    class="form-select complaint-form-select mb-2"
+                                                    required>
+
+                                                    <% complaintStatuses.forEach(status => { %>
+
+                                                        <option
+                                                            value="<%= status %>"
+                                                            <%= complaint.status === status ? "selected" : "" %>>
+
+                                                            <%= status %>
+
+                                                        </option>
+
+                                                    <% }) %>
+
+                                                </select>
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-sm btn-primary w-100">
+
+                                                    Update Status
+
+                                                </button>
+
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+
+                                <% }) %>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HostelCare | Hostel Maintenance Tracker</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        body {
+            background: #f7f9fc;
+        }
+
+        .home-hero {
+            padding: 100px 0;
+            background: linear-gradient(120deg, #102a43, #174f78);
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #d8efff;
+            padding: 9px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .home-heading {
+            font-size: clamp(38px, 5vw, 58px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .home-heading span {
+            color: #69c6ff;
+        }
+
+        .home-description {
+            color: #d5e4ef;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .hero-actions .btn {
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: 600;
+        }
+
+        .hero-actions .btn-primary {
+            background: #2585c5;
+            border-color: #2585c5;
+        }
+
+        .hero-actions .btn-primary:hover {
+            background: #176ca8;
+        }
+
+        .hero-preview {
+            background: white;
+            color: #26384a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 390px;
+            margin: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .preview-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .preview-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: #e5f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .preview-tag {
+            background: #e5f8ed;
+            color: #16834a;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            background: #f5f8fc;
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .preview-item-icon {
+            width: 42px;
+            height: 42px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .preview-item small {
+            color: #7b8794;
+        }
+
+        .features-section {
+            padding: 85px 0;
+        }
+
+        .section-label {
+            color: #2585c5;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading {
+            color: #17324d;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            height: 100%;
+            border: 1px solid #e8edf3;
+            border-radius: 16px;
+            transition: 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(24, 57, 87, 0.1);
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 15px;
+            background: #eaf5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin-bottom: 22px;
+        }
+
+        .feature-card h4 {
+            color: #17324d;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #718096;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .steps-section {
+            padding: 70px 0;
+            background: #edf5fb;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: #2585c5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 19px;
+            margin: 0 auto 18px;
+        }
+
+        .step-card h5 {
+            font-weight: 700;
+            color: #17324d;
+        }
+
+        .step-card p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .cta-section {
+            padding: 65px 20px;
+            background: #173f60;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            color: #d5e4ef;
+        }
+
+        .cta-section .btn {
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 9px;
+        }
+
+        .home-footer {
+            background: #102a43;
+            color: white;
+            padding: 35px 0;
+        }
+
+        .home-footer p {
+            color: #b8c9d8;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .home-hero {
+                padding: 70px 0;
+                text-align: center;
+            }
+
+            .home-description {
+                margin: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-preview {
+                margin-top: 15px;
+            }
+
+            .features-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <%- include("includes/navbar.ejs") %>
+
+        <!-- Hero Section -->
+        <section class="home-hero">
+
+            <div class="container">
+
+                <div class="row align-items-center g-5">
+
+                    <div class="col-lg-7">
+
+                        <span class="hero-label">
+                            SMART HOSTEL MANAGEMENT
+                        </span>
+
+                        <h1 class="home-heading">
+                            Better Hostel Living,
+                            <span>One Solution.</span>
+                        </h1>
+
+                        <p class="home-description">
+                            Say goodbye to unmanaged maintenance problems.
+                            Report complaints, track repair progress and
+                            stay informed with HostelCare.
+                        </p>
+
+                        <div class="hero-actions">
+
+                            <a href="/register" class="btn btn-primary btn-lg">
+                                Get Started →
+                            </a>
+
+                            <a href="/login" class="btn btn-outline-light btn-lg">
+                                Login to Account
+                            </a>
+
+                        </div>
+
+                        <p class="mt-4 mb-0" style="color: #b8d1e4; font-size: 13px;">
+                            A smarter and simpler way to manage hostel maintenance.
+                        </p>
+
+                    </div>
+
+                    <!-- Dashboard Preview -->
+                    <div class="col-lg-5">
+
+                        <div class="hero-preview">
+
+                            <div class="preview-top">
+
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <div class="preview-logo">🏨</div>
+
+                                    <div>
+                                        <h5 class="fw-bold mb-0">HostelCare</h5>
+                                        <small class="text-muted">Maintenance Dashboard</small>
+                                    </div>
+
+                                </div>
+
+                                <span class="preview-tag">● Active</span>
+
+                            </div>
+
+                            <h6 class="fw-bold mb-3">Your Maintenance Overview</h6>
+
+                            <div class="preview-item">
+
+                                <div class="preview-item-icon">📝</div>
+
+                                <div>
+                                    <strong>Report Issues</strong>
+                                    <br>
+                                    <small>Submit maintenance complaints</small>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-item">
+
+                                <div class="preview-item-icon">📊</div>
+
+                                <div>
+                                    <strong>Track Complaints</strong>
+                                    <br>
+                                    <small>Follow every status update</small>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-item">
+
+                                <div class="preview-item-icon">🛠️</div>
+
+                                <div>
+                                    <strong>Get Problems Resolved</strong>
+                                    <br>
+                                    <small>Stay updated on repairs</small>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-4 p-3 rounded-3" style="background: #eaf5ff;">
+
+                                <small class="text-muted">Our goal</small>
+
+                                <h6 class="fw-bold mb-0 mt-1">
+                                    A better hostel experience for everyone.
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="text-center mb-5">
+
+                    <span class="section-label">OUR FEATURES</span>
+
+                    <h2 class="section-heading">
+                        Everything You Need in One Place
+                    </h2>
+
+                    <p class="text-muted mt-3">
+                        Making hostel maintenance organized, transparent and simple.
+                    </p>
+
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">📝</div>
+
+                            <h4>Easy Complaint Reporting</h4>
+
+                            <p>
+                                Report electricity, plumbing, furniture,
+                                cleaning and other hostel-related problems
+                                in just a few steps.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">📊</div>
+
+                            <h4>Real-Time Status Tracking</h4>
+
+                            <p>
+                                Keep track of your complaints and see whether
+                                they are pending, assigned, in progress
+                                or resolved.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">🛠️</div>
+
+                            <h4>Efficient Maintenance</h4>
+
+                            <p>
+                                Help hostel administrators and maintenance
+                                staff organize tasks and manage problems
+                                more efficiently.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- How It Works -->
+        <section class="steps-section">
+
+            <div class="container">
+
+                <div class="text-center mb-5">
+
+                    <span class="section-label">SIMPLE PROCESS</span>
+
+                    <h2 class="section-heading">How HostelCare Works</h2>
+
+                    <p class="text-muted mt-3">
+                        Three simple steps to get your hostel issues addressed.
+                    </p>
+
+                </div>
+
+                <div class="row g-4 text-center">
+
+                    <div class="col-md-4">
+
+                        <div class="step-card">
+
+                            <div class="step-number">1</div>
+
+                            <h5>Register or Login</h5>
+
+                            <p>
+                                Access your account to use the HostelCare platform.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="step-card">
+
+                            <div class="step-number">2</div>
+
+                            <h5>Submit a Complaint</h5>
+
+                            <p>
+                                Describe your maintenance problem and submit it.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="step-card">
+
+                            <div class="step-number">3</div>
+
+                            <h5>Track Resolution</h5>
+
+                            <p>
+                                Follow the complaint status until the issue is resolved.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Call To Action -->
+        <section class="cta-section">
+
+            <div class="container">
+
+                <h2>Ready for a Better Hostel Experience?</h2>
+
+                <p class="mt-3 mb-4">
+                    Join HostelCare and make maintenance management easier.
+                </p>
+
+                <a href="/register" class="btn btn-light">
+                    Create Your Account →
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="home-footer">
+
+            <div class="container text-center">
+
+                <h5 class="fw-bold">🏨 HostelCare</h5>
+
+                <p class="mt-2 mb-3">
+                    Making hostel maintenance simple and organized.
+                </p>
+
+                <p class="mb-0">
+                    &copy; 2026 HostelCare. All Rights Reserved.
+                </p>
+
+            </div>
+
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+        </script>
+
+</body>
+
+</html>

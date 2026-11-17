@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Complaint | HostelCare</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* COMPLAINT FORM PAGE */
+
+        .complaint-page {
+            max-width: 760px;
+            margin: auto;
+        }
+
+        .complaint-form-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
+        }
+
+        .complaint-form-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .complaint-form-icon {
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: #eff6ff;
+            border-radius: 16px;
+        }
+
+        .complaint-form-header h2 {
+            color: #172554;
+            font-weight: 750;
+            margin-bottom: 5px;
+        }
+
+        .complaint-info {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            color: #1e40af;
+        }
+
+        .complaint-info-icon {
+            font-size: 20px;
+        }
+
+        .complaint-form-card .form-label {
+            color: #334155;
+            font-weight: 650;
+            margin-bottom: 8px;
+        }
+
+        .complaint-form-card .form-control,
+        .complaint-form-card .form-select {
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+        }
+
+        .complaint-form-card .form-control:focus,
+        .complaint-form-card .form-select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .complaint-form-card textarea {
+            resize: vertical;
+        }
+
+        .complaint-form-card .form-text {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .complaint-submit-btn {
+            padding: 13px;
+            font-weight: 650;
+            border-radius: 10px;
+        }
+
+        .complaint-back-btn {
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .complaint-form-card {
+                padding: 23px 18px;
+            }
+
+            .complaint-form-header h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <%- include("../includes/navbar.ejs") %>
+
+    <div class="container py-4 py-md-5">
+
+        <div class="complaint-page">
+
+            <div class="complaint-form-card">
+
+
+                <!-- ================= FORM HEADER ================= -->
+
+                <div class="complaint-form-header">
+
+                    <div class="complaint-form-icon">
+                        📝
+                    </div>
+
+                    <div>
+                        <h2>Report a Complaint</h2>
+
+                        <p class="text-muted mb-0">
+                            Help us make your hostel experience better.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= INFORMATION ================= -->
+
+                <div class="complaint-info">
+
+                    <div class="complaint-info-icon">
+                        ℹ️
+                    </div>
+
+                    <div>
+                        <strong>Before submitting</strong>
+
+                        <div class="small mt-1">
+                            Provide accurate details about the issue so the maintenance team can resolve it quickly.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ERROR MESSAGE ================= -->
+
+                <% if (error) { %>
+
+                    <div class="alert alert-danger rounded-3">
+                        <strong>Unable to submit complaint</strong>
+                        <div class="small mt-1">
+                            <%= error %>
+                        </div>
+                    </div>
+
+                <% } %>
+
+
+                <!-- ================= COMPLAINT FORM ================= -->
+
+                <form action="/complaints" method="POST">
+
+
+                    <!-- COMPLAINT TITLE -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Complaint Title <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            placeholder="Example: Ceiling fan is not working"
+                            value="<%= formData.title || '' %>"
+                            maxlength="100"
+                            required
+                        >
+
+                        <div class="form-text">
+                            Write a short title describing the problem.
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Complaint Category <span class="text-danger">*</span>
+                        </label>
+
+                        <% const categories = ["Electrical", "Plumbing", "Furniture", "Cleaning", "Internet", "Other"] %>
+
+                        <select name="category" class="form-select" required>
+
+                            <option value="">
+                                Choose the type of problem
+                            </option>
+
+                            <% categories.forEach(category => { %>
+
+                                <option
+                                    value="<%= category %>"
+                                    <%= formData.category === category ? "selected" : "" %>
+                                >
+
+                                    <% if (category === "Electrical") { %>
+                                        ⚡ Electrical
+                                    <% } else if (category === "Plumbing") { %>
+                                        🚰 Plumbing
+                                    <% } else if (category === "Furniture") { %>
+                                        🪑 Furniture
+                                    <% } else if (category === "Cleaning") { %>
+                                        🧹 Cleaning
+                                    <% } else if (category === "Internet") { %>
+                                        📶 Internet
+                                    <% } else { %>
+                                        📌 Other
+                                    <% } %>
+
+                                </option>
+
+                            <% }) %>
+
+                        </select>
+
+                        <div class="form-text">
+                            Select the category that best matches your issue.
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Problem Description <span class="text-danger">*</span>
+                        </label>
+
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            rows="5"
+                            maxlength="1000"
+                            placeholder="Explain what happened, where the issue is, and when you first noticed it..."
+                            required
+                        ><%= formData.description || '' %></textarea>
+
+                        <div class="form-text">
+                            Include enough details to help the maintenance team understand the problem.
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary complaint-submit-btn w-100">
+
+                        Submit Complaint →
+
+                    </button>
+
+
+                    <!-- BACK BUTTON -->
+
+                    <a
+                        href="/student/dashboard"
+                        class="btn btn-outline-secondary complaint-back-btn w-100 mt-3">
+
+                        ← Back to Dashboard
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

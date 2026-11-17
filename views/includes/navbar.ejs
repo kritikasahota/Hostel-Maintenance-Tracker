@@ -1,0 +1,125 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="/">
+            🏨 HostelCare
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <% if (!currentUser) { %>
+
+                    <!-- Guest Navigation -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light rounded-pill px-4"
+                           href="/register">
+                            Register
+                        </a>
+                    </li>
+
+                <% } else if (currentUser.role === "student") { %>
+
+                    <!-- Student Navigation -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/complaints/new">
+                            Raise Complaint
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/dashboard">
+                            My Complaints
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light rounded-pill px-4"
+                           href="/logout">
+                            Logout
+                        </a>
+                    </li>
+
+                <% } else if (currentUser.role === "admin") { %>
+
+                    <!-- Admin Navigation -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">
+                            Manage Rooms
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/complaints">
+                            Manage Complaints
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light rounded-pill px-4"
+                           href="/logout">
+                            Logout
+                        </a>
+                    </li>
+
+                <% } else if (currentUser.role === "staff") { %>
+
+                    <!-- Staff Navigation -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/staff/dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/staff/dashboard">
+                            Assigned Complaints
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light rounded-pill px-4"
+                           href="/logout">
+                            Logout
+                        </a>
+                    </li>
+
+                <% } %>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,515 @@
+
+/* =====================================================
+   HOSTELCARE - GLOBAL STYLING
+===================================================== */
+
+/* Color palette */
+:root {
+    --primary: #172554;
+    --primary-light: #2563eb;
+    --accent: #60a5fa;
+    --background: #f1f5f9;
+    --white: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.custom-navbar {
+    background: linear-gradient(120deg, #172554, #1e40af);
+    padding: 15px 0;
+    box-shadow: 0 3px 15px rgba(15, 23, 42, 0.15);
+}
+
+.navbar-brand {
+    font-size: 25px;
+    font-weight: 750;
+    letter-spacing: 0.4px;
+    color: white !important;
+}
+
+.nav-link {
+    color: #dbeafe !important;
+    margin-left: 15px;
+    font-weight: 500;
+    transition: 0.25s;
+}
+
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+    border-radius: 9px;
+    font-weight: 600;
+    padding: 9px 18px;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero-section {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    color: white;
+    padding: 90px 0;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-heading {
+    font-size: clamp(35px, 5vw, 52px);
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.hero-heading span {
+    color: #93c5fd;
+    display: block;
+}
+
+.hero-text {
+    color: #dbeafe;
+    font-size: 17px;
+    margin-top: 20px;
+    line-height: 1.8;
+    max-width: 550px;
+}
+
+.hero-card {
+    background-color: white;
+    color: var(--primary);
+    padding: 40px 25px;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+}
+
+.hero-icon {
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+.hero-card p {
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.status-box {
+    background-color: #eff6ff;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+.status-box span,
+.status-box strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+
+.features-section {
+    padding: 85px 0;
+}
+
+.features-section h2 {
+    color: var(--primary);
+    font-weight: 750;
+    margin-bottom: 12px;
+}
+
+.feature-card {
+    background-color: white;
+    padding: 35px 25px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    height: 100%;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+    border-color: #bfdbfe;
+}
+
+.feature-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.feature-card h4 {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    background-color: var(--primary);
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+
+.footer p {
+    color: #cbd5e1;
+    margin-top: 10px;
+}
+
+/* =====================================================
+   AUTHENTICATION PAGES
+===================================================== */
+
+.auth-container {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 15px;
+}
+
+.auth-card {
+    background-color: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 38px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.auth-card h2 {
+    color: var(--primary);
+    font-weight: 750;
+    margin-bottom: 10px;
+}
+
+.auth-card p {
+    color: var(--muted);
+}
+
+.auth-card .form-control {
+    padding: 12px 14px;
+}
+
+.auth-card .btn {
+    padding: 12px;
+    margin-top: 10px;
+}
+
+/* =====================================================
+   COMMON FORM STYLING
+===================================================== */
+
+.form-label {
+    color: #334155;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    padding: 11px 13px;
+    color: var(--text);
+    background-color: white;
+    transition: 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* =====================================================
+   COMMON DASHBOARD STYLING
+===================================================== */
+
+.container h2,
+.container h3 {
+    color: var(--primary);
+    font-weight: 750;
+}
+
+.container h4,
+.container h5 {
+    font-weight: 650;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.card-header {
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+    padding: 17px 20px;
+    font-weight: 700;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.card-body {
+    padding: 22px;
+}
+
+/* =====================================================
+   STUDENT DASHBOARD
+===================================================== */
+
+.dashboard-stat-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: white;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+.dashboard-stat-card .card-body {
+    padding: 25px;
+}
+
+.dashboard-stat-card h2 {
+    color: var(--primary-light);
+    font-size: 32px;
+    font-weight: 750;
+    margin-top: 12px;
+}
+
+.dashboard-stat-card p {
+    color: var(--muted);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* =====================================================
+   TABLES
+===================================================== */
+
+.table {
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: #eff6ff;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 15px;
+    color: #475569;
+    border-color: #edf2f7;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* =====================================================
+   COMPLAINT FORM
+===================================================== */
+
+.complaint-form-card {
+    max-width: 700px;
+    background: white;
+    padding: 38px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    margin: 30px auto;
+}
+
+.complaint-form-card h2 {
+    color: var(--primary);
+    font-weight: 750;
+    margin-bottom: 10px;
+}
+
+.complaint-form-card .form-control,
+.complaint-form-card .form-select {
+    padding: 12px 14px;
+}
+
+/* =====================================================
+   COMPLAINT DETAILS
+===================================================== */
+
+.complaint-detail-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.complaint-detail-card h3 {
+    color: var(--primary);
+    font-weight: 750;
+}
+
+.complaint-detail-card p {
+    color: #475569;
+    line-height: 1.8;
+}
+
+/* =====================================================
+   ALERTS AND STATUS BADGES
+===================================================== */
+
+.alert {
+    border: none;
+    border-radius: 10px;
+}
+
+.badge {
+    padding: 7px 11px;
+    font-weight: 600;
+    border-radius: 7px;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .hero-heading {
+        font-size: 36px;
+    }
+
+    .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .features-section {
+        padding: 55px 0;
+    }
+
+    .auth-card {
+        padding: 28px 22px;
+    }
+
+    .complaint-form-card {
+        padding: 25px 20px;
+    }
+
+    .dashboard-stat-card .card-body {
+        padding: 18px;
+    }
+
+    .table {
+        min-width: 650px;
+    }
+
+    .complaint-detail-card {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .navbar-brand {
+        font-size: 21px;
+    }
+
+    .hero-heading {
+        font-size: 32px;
+    }
+
+    .hero-card {
+        padding: 28px 20px;
+    }
+
+    .dashboard-stat-card h2 {
+        font-size: 26px;
+    }
+
+}
